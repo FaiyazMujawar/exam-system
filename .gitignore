@@ -1,0 +1,3 @@
+*.properties
+.vscode
+lib/
