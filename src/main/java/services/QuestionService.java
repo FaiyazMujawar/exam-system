@@ -170,19 +170,14 @@ public class QuestionService {
   }
 
   /**
-   * Get the questions with specified IDs from the database.
+   * Get random questions from the database.
    */
-  public List<Question> getQuestionsFromIds(List<Integer> ids) {
+  public List<Question> getRandomQuestions(int count) {
     List<Question> questions = new ArrayList<>();
-    String idList = "";
-    for (int id : ids) {
-      idList += Integer.toString(id) + ",";
-    }
-    idList = idList.substring(0, idList.length() - 1);
     try {
       statement =
         connection.prepareStatement(
-          "SELECT * FROM questions WHERE ID in (" + idList + ")"
+          "SELECT DISTINCT * FROM questions ORDER BY RAND() LIMIT ?"
         );
       resultSet = statement.executeQuery();
       while (resultSet.next()) {
