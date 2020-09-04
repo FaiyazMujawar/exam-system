@@ -3,8 +3,6 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.ArrayList;
-import java.util.List;
 import main.java.models.Question;
 import main.java.services.QuestionService;
 import org.junit.jupiter.api.Test;
@@ -81,16 +79,5 @@ public class QuestionServiceTest {
       "Should delete specified question."
     );
     assertEquals(count - 1, qService.getQuestionsCount());
-  }
-
-  @Test
-  void testgetQuestionsFromIds() {
-    QuestionService qService = new QuestionService();
-    List<Integer> ids = new ArrayList<>();
-    ids.add(1);
-    ids.add(2);
-    ids.add(3);
-    ids.add(4);
-    assertEquals(4, qService.getQuestionsFromIds(ids).size());
   }
 }
