@@ -179,6 +179,7 @@ public class QuestionService {
         connection.prepareStatement(
           "SELECT DISTINCT * FROM questions ORDER BY RAND() LIMIT ?"
         );
+      statement.setInt(1, count);
       resultSet = statement.executeQuery();
       while (resultSet.next()) {
         questions.add(
