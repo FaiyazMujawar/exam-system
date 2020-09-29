@@ -1,6 +1,5 @@
 package main.java.views;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -37,45 +36,61 @@ public class ViewQuestionPage implements ActionListener {
     answer = question.getcorrectAnswer();
     frame = new JFrame("Question " + question.getId());
 
-    frame.setSize(300, 500);
-    frame.setLayout(new FlowLayout());
+    frame.setSize(661, 792);
+    frame.setLayout(null);
 
     // Labels
     idLabel = new JLabel("ID");
+    idLabel.setBounds(39, 41, 238, 53);
     qtnLabel = new JLabel("Question");
+    qtnLabel.setBounds(39, 119, 238, 53);
     optALabel = new JLabel("Option A");
+    optALabel.setBounds(39, 257, 238, 53);
     optBLabel = new JLabel("Option B");
+    optBLabel.setBounds(39, 353, 238, 53);
     optCLabel = new JLabel("Option C");
+    optCLabel.setBounds(39, 431, 238, 53);
     optDLabel = new JLabel("Option D");
+    optDLabel.setBounds(39, 509, 238, 53);
     answerLabel = new JLabel("Correct Answer");
+    answerLabel.setBounds(39, 587, 238, 53);
 
     // TextFields
-    idField = new JTextField(25);
+    idField = new JTextField();
+    idField.setBounds(239, 41, 373, 49);
     idField.setEditable(false);
     idField.setText(Integer.toString(ID));
-    qtnField = new JTextArea(4, 25);
+    qtnField = new JTextArea();
+    qtnField.setBounds(239, 119, 373, 131);
     qtnField.setEditable(false);
     qtnField.setText(qtn);
-    optAField = new JTextField(25);
+    optAField = new JTextField();
+    optAField.setBounds(239, 279, 373, 49);
     optAField.setEditable(false);
     optAField.setText(optA);
-    optBField = new JTextField(25);
+    optBField = new JTextField();
+    optBField.setBounds(239, 357, 373, 49);
     optBField.setEditable(false);
     optBField.setText(optB);
-    optCField = new JTextField(25);
+    optCField = new JTextField();
+    optCField.setBounds(239, 435, 373, 49);
     optCField.setEditable(false);
     optCField.setText(optC);
-    optDField = new JTextField(25);
+    optDField = new JTextField();
+    optDField.setBounds(239, 509, 373, 49);
     optDField.setEditable(false);
     optDField.setText(optD);
     answerField = new JComboBox<>(new String[] { "A", "B", "C", "D" });
     answerField.setSelectedItem(question.getcorrectAnswer());
     answerField.setEnabled(false);
+    answerField.setBounds(239, 587, 373, 49);
 
     // Buttons
     update = new JButton("Update");
+    update.setBounds(153, 673, 148, 48);
     update.addActionListener(this);
     delete = new JButton("Delete");
+    delete.setBounds(321, 673, 148, 48);
     delete.addActionListener(this);
 
     frame.add(idLabel);
@@ -119,7 +134,8 @@ public class ViewQuestionPage implements ActionListener {
         optCField.setEditable(false);
         optDField.setEditable(false);
         answerField.setEnabled(false);
-        adminController.addQuestion(
+        adminController.updateQuestion(
+          Integer.parseInt(idField.getText()),
           qtnField.getText(),
           optAField.getText(),
           optBField.getText(),
@@ -129,6 +145,13 @@ public class ViewQuestionPage implements ActionListener {
         );
         update.setText("Update");
         delete.setText("Delete");
+        JOptionPane.showMessageDialog(
+          this.frame,
+          "Question updated succesfully!",
+          "SUCCESS!",
+          JOptionPane.INFORMATION_MESSAGE
+        );
+        AdminPage.setTable();
       } catch (InvalidArgumentsException e) {
         JOptionPane.showMessageDialog(
           frame,
@@ -140,8 +163,8 @@ public class ViewQuestionPage implements ActionListener {
     } else if (command == "Delete") {
       int opt = JOptionPane.showConfirmDialog(
         frame,
-        "Confirm to add the question?",
-        "Add Question",
+        "Confirm to delete the question?",
+        "Delete Question",
         JOptionPane.YES_NO_OPTION
       );
       if (opt == 0) {

@@ -1,6 +1,5 @@
 package main.java.views;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -28,29 +27,43 @@ public class AddQuestionPage implements ActionListener {
     adminController = new AdminController();
 
     frame = new JFrame("Add Question");
-    frame.setSize(300, 500);
-    frame.setLayout(new FlowLayout());
+    frame.setSize(661, 792);
+    frame.setLayout(null);
 
     // Labels
     qtnLabel = new JLabel("Question");
+    qtnLabel.setBounds(39, 41, 147, 53);
     optALabel = new JLabel("Option A");
+    optALabel.setBounds(39, 197, 147, 53);
     optBLabel = new JLabel("Option B");
+    optBLabel.setBounds(39, 275, 147, 53);
     optCLabel = new JLabel("Option C");
+    optCLabel.setBounds(39, 353, 147, 53);
     optDLabel = new JLabel("Option D");
+    optDLabel.setBounds(39, 431, 147, 53);
     answerLabel = new JLabel("Correct Answer");
+    answerLabel.setBounds(39, 509, 147, 53);
 
     // TextFields
-    qtnField = new JTextArea(4, 25);
-    optAField = new JTextField(25);
-    optBField = new JTextField(25);
-    optCField = new JTextField(25);
-    optDField = new JTextField(25);
+    qtnField = new JTextArea();
+    qtnField.setBounds(239, 41, 373, 131);
+    optAField = new JTextField();
+    optAField.setBounds(239, 201, 373, 49);
+    optBField = new JTextField();
+    optBField.setBounds(239, 279, 373, 49);
+    optCField = new JTextField();
+    optCField.setBounds(239, 357, 373, 49);
+    optDField = new JTextField();
+    optDField.setBounds(239, 431, 373, 49);
     answerField = new JComboBox<>(new String[] { "A", "B", "C", "D" });
+    answerField.setBounds(239, 509, 373, 49);
 
     // Buttons
     confirm = new JButton("Confirm");
+    confirm.setBounds(153, 597, 147, 53);
     confirm.addActionListener(this);
     cancel = new JButton("Cancel");
+    cancel.setBounds(330, 597, 147, 53);
     cancel.addActionListener(this);
 
     frame.add(qtnLabel);

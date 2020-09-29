@@ -1,7 +1,5 @@
 package main.java.views;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -30,19 +28,19 @@ public class AdminPage implements ActionListener {
   private static JScrollPane scrollPane;
   private static AdminController adminController;
 
-  /* 
-   TODO: Refine the UI.
-  */
-  AdminPage() {
+  public AdminPage() {
     adminController = new AdminController();
     frame = new JFrame("Admin Page");
-    frame.setLayout(new FlowLayout());
-    frame.setSize(800, 500);
+    frame.setLayout(null);
+    frame.setSize(1300, 710);
 
-    searchText = new JTextField(50);
+    searchText = new JTextField();
+    searchText.setBounds(312, 39, 676, 47);
     search = new JButton("Search");
+    search.setBounds(1015, 39, 213, 47);
     search.addActionListener(this);
-    add = new JButton("add");
+    add = new JButton("Add");
+    add.setBounds(64, 39, 213, 47);
     add.addActionListener(this);
 
     frame.add(add);
@@ -113,12 +111,7 @@ public class AdminPage implements ActionListener {
       frame.remove(scrollPane);
     } catch (Exception e) {}
     scrollPane = new JScrollPane(table);
-    scrollPane.setPreferredSize(
-      new Dimension(
-        (int) (frame.getWidth() * 1),
-        (int) (frame.getWidth() * 0.5)
-      )
-    );
+    scrollPane.setBounds(64, 125, 1164, 500);
     frame.add(scrollPane);
   }
 
