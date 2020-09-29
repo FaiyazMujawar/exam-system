@@ -14,6 +14,7 @@ public class Validation {
     String optC,
     String optD
   ) {
+    // TODO: Modify these configurations.
     List<String> errors = new ArrayList<>();
     if (qtn.length() < 20) errors.add("Question");
     if (optA.length() < 20) errors.add("Question");

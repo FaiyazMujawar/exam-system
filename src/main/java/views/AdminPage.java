@@ -1,7 +1,6 @@
 package main.java.views;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -29,20 +28,27 @@ public class AdminPage implements ActionListener {
   private static JTextField searchText;
   private static JScrollPane scrollPane;
   private static AdminController adminController;
+  private Font font;
 
-  /* 
-   TODO: Refine the UI.
-  */
-  AdminPage() {
+  public AdminPage() {
     adminController = new AdminController();
     frame = new JFrame("Admin Page");
-    frame.setLayout(new FlowLayout());
-    frame.setSize(800, 500);
+    frame.setLayout(null);
+    frame.setSize(1300, 700);
+    frame.setResizable(false);
 
-    searchText = new JTextField(50);
+    font = new Font("Sans Serif", Font.PLAIN, 24);
+
+    searchText = new JTextField();
+    searchText.setFont(font);
+    searchText.setBounds(312, 39, 676, 47);
     search = new JButton("Search");
+    search.setFont(font);
+    search.setBounds(1015, 39, 213, 47);
     search.addActionListener(this);
-    add = new JButton("add");
+    add = new JButton("Add");
+    add.setFont(font);
+    add.setBounds(64, 39, 213, 47);
     add.addActionListener(this);
 
     frame.add(add);
@@ -99,6 +105,7 @@ public class AdminPage implements ActionListener {
     );
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     table.setRowHeight(30);
+    table.setFont(new Font("Sans Serif", Font.PLAIN, 20));
     table.setDefaultEditor(Object.class, null);
     TableColumnModel columnModel = table.getColumnModel();
     columnModel.getColumn(0).setMinWidth(50);
@@ -113,12 +120,7 @@ public class AdminPage implements ActionListener {
       frame.remove(scrollPane);
     } catch (Exception e) {}
     scrollPane = new JScrollPane(table);
-    scrollPane.setPreferredSize(
-      new Dimension(
-        (int) (frame.getWidth() * 1),
-        (int) (frame.getWidth() * 0.5)
-      )
-    );
+    scrollPane.setBounds(64, 125, 1164, 500);
     frame.add(scrollPane);
   }
 

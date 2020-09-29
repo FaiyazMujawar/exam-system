@@ -53,6 +53,29 @@ public class AdminController {
     }
   }
 
+  public void updateQuestion(
+    int id,
+    String questionString,
+    String optionA,
+    String optionB,
+    String optionC,
+    String optionD,
+    String correctAnswer
+  )
+    throws InvalidArgumentsException {
+    qService.updatequestion(
+      new Question(
+        id,
+        questionString,
+        optionA,
+        optionB,
+        optionC,
+        optionD,
+        correctAnswer
+      )
+    );
+  }
+
   public Question getQuestionById(int id) throws InvalidArgumentsException {
     if (id < 1) throw new InvalidArgumentsException(
       new ArrayList<>(Arrays.asList("ID"))
