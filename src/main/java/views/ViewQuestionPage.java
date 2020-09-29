@@ -1,6 +1,7 @@
 package main.java.views;
 
-import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -25,6 +26,8 @@ public class ViewQuestionPage implements ActionListener {
   private JLabel idLabel, qtnLabel, optALabel, optBLabel, optCLabel, optDLabel, answerLabel;
   private JComboBox<String> answerField;
 
+  Font font;
+
   ViewQuestionPage(Question question) {
     adminController = new AdminController();
 
@@ -37,45 +40,85 @@ public class ViewQuestionPage implements ActionListener {
     answer = question.getcorrectAnswer();
     frame = new JFrame("Question " + question.getId());
 
-    frame.setSize(300, 500);
-    frame.setLayout(new FlowLayout());
+    frame.setSize(661, 792);
+    frame.setLayout(null);
+    frame.setResizable(false);
+
+    font = new Font("Sans Serif", Font.PLAIN, 24);
 
     // Labels
     idLabel = new JLabel("ID");
+    idLabel.setBounds(39, 41, 238, 53);
+    idLabel.setFont(font);
     qtnLabel = new JLabel("Question");
+    qtnLabel.setFont(font);
+    qtnLabel.setBounds(39, 119, 238, 53);
     optALabel = new JLabel("Option A");
+    optALabel.setFont(font);
+    optALabel.setBounds(39, 257, 238, 53);
     optBLabel = new JLabel("Option B");
+    optBLabel.setFont(font);
     optCLabel = new JLabel("Option C");
+    optCLabel.setFont(font);
+    optCLabel.setBounds(39, 431, 238, 53);
     optDLabel = new JLabel("Option D");
+    optDLabel.setFont(font);
+    optDLabel.setBounds(39, 509, 238, 53);
     answerLabel = new JLabel("Correct Answer");
+    answerLabel.setFont(font);
 
     // TextFields
-    idField = new JTextField(25);
+    idField = new JTextField();
+    idField.setMargin(new Insets(5, 5, 5, 5));
+    idField.setFont(font);
+    idField.setBounds(239, 41, 373, 49);
     idField.setEditable(false);
     idField.setText(Integer.toString(ID));
-    qtnField = new JTextArea(4, 25);
+    qtnField = new JTextArea();
+    qtnField.setLineWrap(true);
+    qtnField.setMargin(new Insets(5, 5, 5, 5));
+    qtnField.setFont(font);
+    qtnField.setBounds(239, 119, 373, 131);
     qtnField.setEditable(false);
     qtnField.setText(qtn);
-    optAField = new JTextField(25);
+    optAField = new JTextField();
+    optAField.setMargin(new Insets(5, 5, 5, 5));
+    optAField.setFont(font);
+    optAField.setBounds(239, 279, 373, 49);
     optAField.setEditable(false);
     optAField.setText(optA);
-    optBField = new JTextField(25);
+    optBField = new JTextField();
+    optBField.setMargin(new Insets(5, 5, 5, 5));
+    optBField.setFont(font);
+    optBField.setBounds(239, 357, 373, 49);
     optBField.setEditable(false);
     optBField.setText(optB);
-    optCField = new JTextField(25);
+    optCField = new JTextField();
+    optCField.setMargin(new Insets(5, 5, 5, 5));
+    optCField.setFont(font);
+    optCField.setBounds(239, 435, 373, 49);
     optCField.setEditable(false);
     optCField.setText(optC);
-    optDField = new JTextField(25);
+    optDField = new JTextField();
+    optDField.setMargin(new Insets(5, 5, 5, 5));
+    optDField.setFont(font);
+    optDField.setBounds(239, 509, 373, 49);
     optDField.setEditable(false);
     optDField.setText(optD);
     answerField = new JComboBox<>(new String[] { "A", "B", "C", "D" });
     answerField.setSelectedItem(question.getcorrectAnswer());
+    answerField.setFont(font);
     answerField.setEnabled(false);
+    answerField.setBounds(239, 587, 373, 49);
 
     // Buttons
     update = new JButton("Update");
+    update.setFont(font);
+    update.setBounds(153, 673, 148, 48);
     update.addActionListener(this);
     delete = new JButton("Delete");
+    delete.setFont(font);
+    delete.setBounds(321, 673, 148, 48);
     delete.addActionListener(this);
 
     frame.add(idLabel);
@@ -119,7 +162,8 @@ public class ViewQuestionPage implements ActionListener {
         optCField.setEditable(false);
         optDField.setEditable(false);
         answerField.setEnabled(false);
-        adminController.addQuestion(
+        adminController.updateQuestion(
+          Integer.parseInt(idField.getText()),
           qtnField.getText(),
           optAField.getText(),
           optBField.getText(),
@@ -129,6 +173,13 @@ public class ViewQuestionPage implements ActionListener {
         );
         update.setText("Update");
         delete.setText("Delete");
+        JOptionPane.showMessageDialog(
+          this.frame,
+          "Question updated succesfully!",
+          "SUCCESS!",
+          JOptionPane.INFORMATION_MESSAGE
+        );
+        AdminPage.setTable();
       } catch (InvalidArgumentsException e) {
         JOptionPane.showMessageDialog(
           frame,
@@ -140,8 +191,8 @@ public class ViewQuestionPage implements ActionListener {
     } else if (command == "Delete") {
       int opt = JOptionPane.showConfirmDialog(
         frame,
-        "Confirm to add the question?",
-        "Add Question",
+        "Confirm to delete the question?",
+        "Delete Question",
         JOptionPane.YES_NO_OPTION
       );
       if (opt == 0) {
@@ -181,7 +232,7 @@ public class ViewQuestionPage implements ActionListener {
       optBField.setEditable(false);
       optCField.setEditable(false);
       optDField.setEditable(false);
-      answerField.setEditable(false);
+      answerField.setEnabled(false);
     }
   }
 }
