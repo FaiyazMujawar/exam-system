@@ -12,7 +12,7 @@ public class TestController {
   private List<String> userSelectedAnswers;
   private QuestionService qService;
 
-  TestController(int count) {
+  public TestController(int count) {
     qService = new QuestionService();
     questionsCount = count;
     userSelectedAnswers = new ArrayList<>();
@@ -58,7 +58,7 @@ public class TestController {
     int result = 0;
     int i = 0;
     for (Question question : questions) {
-      if (question.getcorrectAnswer() == userSelectedAnswers.get(i++)) {
+      if (question.getcorrectAnswer().equals(userSelectedAnswers.get(i++))) {
         result++;
       }
     }
