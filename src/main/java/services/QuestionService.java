@@ -25,7 +25,7 @@ public class QuestionService {
   public QuestionService() {
     properties = new Properties();
     try {
-      properties.load(new FileReader("app.properties"));
+      properties.load(new FileReader("test.properties"));
       Class.forName("com.mysql.cj.jdbc.Driver");
       connection =
         DriverManager.getConnection(
@@ -60,14 +60,15 @@ public class QuestionService {
     try {
       statement =
         connection.prepareStatement(
-          "INSERT INTO questions VALUES(null,?,?,?,?,?,?)"
+          "INSERT INTO questions VALUES(?,?,?,?,?,?,?)"
         );
-      statement.setString(1, question.getQuestion());
-      statement.setString(2, question.getOptionA());
-      statement.setString(3, question.getOptionB());
-      statement.setString(4, question.getOptionC());
-      statement.setString(5, question.getOptionD());
-      statement.setString(6, question.getcorrectAnswer());
+      statement.setLong(1, question.getId());
+      statement.setString(2, question.getQuestion());
+      statement.setString(3, question.getOptionA());
+      statement.setString(4, question.getOptionB());
+      statement.setString(5, question.getOptionC());
+      statement.setString(6, question.getOptionD());
+      statement.setString(7, question.getcorrectAnswer());
       if (statement.executeUpdate() > 0) return true;
     } catch (Exception e) {
       e.printStackTrace();
