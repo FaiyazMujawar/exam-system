@@ -18,7 +18,6 @@ public class OperationsOnUser {
 	private String type;
 	private Connection con=null;
 	private ResultSet rs;
-	private CreateConnection connection=new CreateConnection();
 	private User userData;
 	private User allUsersData;
 	private ArrayList<User> allUsersList=new ArrayList();
@@ -34,7 +33,7 @@ public class OperationsOnUser {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=connection.createConnecton();
+			con=DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/o6guoqkU7U", "o6guoqkU7U","fflIqlLQwL");
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -76,12 +75,12 @@ public class OperationsOnUser {
 	
 //	Function to delete user from database
 
-	public boolean deleteUser(String name) {
-		String query="delete from users where name=?";
+	public boolean deleteUser(String username) {
+		String query="delete from users where username=?";
 		
 		try {
 			PreparedStatement ps=con.prepareStatement(query);
-			ps.setString(1,name);
+			ps.setString(1,username);
 			count=ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,7 +97,7 @@ public class OperationsOnUser {
 	
 //	Function to display user details  
 	
-	public User displayUser(String name) {
+	public User getUser(String name) {
 		
 		String query="select * from users where name='"+name+"'";
 		Statement st;
@@ -126,7 +125,7 @@ public class OperationsOnUser {
 	
 	
 	
-	public ArrayList<User> displayAllUsers() {
+	public ArrayList<User> getAllUsers() {
 		
 		String query="select * from users";
 		try {

@@ -23,7 +23,6 @@ public class LoginPage {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private Connection con=null;
-	private CreateConnection connection=new CreateConnection();
 	private boolean status=false;
 
 	/**
@@ -49,9 +48,8 @@ public class LoginPage {
 		initialize();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=connection.createConnecton();
-			System.out.println("Connected to DB");
-		} catch (ClassNotFoundException e) {
+			con=DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/o6guoqkU7U", "o6guoqkU7U","fflIqlLQwL");
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
