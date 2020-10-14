@@ -1,4 +1,6 @@
 *.properties
+.project
+.classpath
 .vscode
 lib/
 /bin/
